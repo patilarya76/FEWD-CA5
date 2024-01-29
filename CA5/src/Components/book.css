@@ -1,0 +1,77 @@
+/* Book.css */
+
+/* Navbar Styles */
+.navbar {
+    background-color: orangered;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95vw;
+    margin-left: 10px;
+  }
+  
+  .navbar h1 {
+    margin: 0;
+  }
+  
+  .navbar input[type="text"] {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 10px;
+    height: 4vh;
+    width: 30vw;
+  }
+  
+  .navbar button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+  
+  /* Book Container Styles */
+  .book-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    height: calc(100vh - 80px); /* Adjusted height to cover the whole screen */
+    overflow-y: auto; /* Enable scrolling if content exceeds viewport height */
+  }
+  
+  .book-item {
+    background-color: #F5F5F5;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .book-title {
+    margin-top: 0;
+  }
+  
+  .book-img {
+    max-width: 100%;
+    border-radius: 5px;
+  }
+  
+  .book-author {
+    margin: 5px 0;
+  }
+  
+  .book-rating {
+    margin: 5px 0;
+    font-style: italic;
+  }
+  
+  /* Hover Effect */
+  .book-item:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
