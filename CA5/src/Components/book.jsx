@@ -1,55 +1,58 @@
-// Book.js
-
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Book.css';
+import './book.css';
+import { Link } from 'react-router-dom';
 
 function Book() {
+  // State variables for storing book data and search input
   const [books, setBooks] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchBook, setSearchBook] = useState('');
 
+  // Fetch book data from the API on component mount
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchData = async () => {
       try {
+        // Make API request to get book data
         const result = await axios.get('https://reactnd-books-api.udacity.com/books', {
           headers: { 'Authorization': 'whatever-you-want' }
         });
-
+        // Update state with the received book data
         setBooks(result.data.books);
       } catch (error) {
-        console.log("Status Code : ", error.response.status);
+        // Log error details if the API request fails
+        console.log("Status Code:", error.response.status);
         console.log("Website not found");
       }
     };
 
-    fetchUserData();
+    // Call the fetchData function
+    fetchData();
   }, []);
 
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-  };
+  // Handler function for updating the searchBook state based on input changes
+  const handleSearch = (e) => setSearchBook(e.target.value);
 
-  const filteredBooks = books.filter((book) =>
-  book.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Filter books based on the search input
+  const filteredBooks = books.filter((book) => book.title.toLowerCase().includes(searchBook.toLowerCase()));
 
   return (
     <>
+      {/* Navbar with title, search input, and register button */}
       <div className="navbar">
         <h1>Kalvium Books</h1>
-        <input
-          type="text"
-          placeholder="Search for books..."
-          value={searchQuery}
-          onChange={handleSearch}
-        />
-        <button>REGISTER</button>
+        <input className="search" type="text" placeholder="Search for books..." value={searchBook} onChange={handleSearch} />
+        <Link to="/register">
+          <button className="register-button">REGISTER</button>
+        </Link>
       </div>
-      <div className="book-container">
+
+      {/* Grid to display filtered books */}
+      <div className="grid">
         {filteredBooks.map((book, index) => (
-          <div key={index} className="book-item">
-            <h2 className="book-title">{book.title}</h2>
-            <div className="book-details">
+          <div key={index} className="item">
+            {/* Book details: title, image, author, and rating */}
+            <h2 className="title">{book.title}</h2>
+            <div className="details">
               <img src={book.imageLinks.smallThumbnail} alt={book.title} className="book-img" />
             </div>
             <p className="book-author">{book.authors[0]}</p>
